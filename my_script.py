@@ -2,6 +2,9 @@
 
 from pyspark import SparkConf, SparkContext
 
+def containsSpark(s):
+    return "Spark" in s
+
 if __name__ == "__main__":
     conf = SparkConf().setMaster("local").setAppName("My App")
     sc = SparkContext(conf = conf)
@@ -35,3 +38,5 @@ if __name__ == "__main__":
     for line in  s_f_rdd.collect():
         num += 1
         print(line,'+++++ +++++++ +++++ collect', num)
+    word = s_f_rdd.filter(containsSpark)
+    print(word.count(), '-------- -------')
